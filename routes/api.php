@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgetController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,8 +21,11 @@ use App\Http\Controllers\AuthController;
 // });
 
 
- // Login Routes 
- Route::post('/login',[AuthController::class, 'Login']);
+// Login Routes 
+Route::post('/login', [AuthController::class, 'Login']);
 
- // Register Routes 
-Route::post('/register',[AuthController::class, 'Register']);
+// Register Routes 
+Route::post('/register', [AuthController::class, 'Register']);
+
+// Forget Password Routes 
+Route::post('/forgetpassword', [ForgetController::class, 'ForgetPassword']);
