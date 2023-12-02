@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\ResetController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,19 +18,25 @@ use App\Http\Controllers\ResetController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 
-// Login Routes 
+// Login Route
 Route::post('/login', [AuthController::class, 'Login']);
 
-// Register Routes 
+// Register Route
 Route::post('/register', [AuthController::class, 'Register']);
 
-// Forget Password Routes 
+// Forget Password Route
 Route::post('/forgetpassword', [ForgetController::class, 'ForgetPassword']);
 
-// Reset Password Routes 
+// Reset Password Route 
 Route::post('/resetpassword', [ResetController::class, 'ResetPassword']);
+
+// Current User Route 
+Route::get('/user', [UserController::class, 'User'])->middleware('auth:api');
+
+// Update User Route
+Route::post('/updateprofile', [UserController::class, 'UpdateProfile'])->middleware('auth:api');

@@ -44,8 +44,8 @@ class AuthController extends Controller
     public function Register(RegisterRequest $request)
     {
         try {
-
             $user = User::create([
+                'username' => $request->username, // Ensure this line is present and correctly getting the username from the request
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
