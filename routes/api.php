@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CreateNewPostController;
 use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\UserController;
@@ -40,3 +41,6 @@ Route::get('/user', [UserController::class, 'User'])->middleware('auth:api');
 
 // Update User Route
 Route::post('/updateprofile', [UserController::class, 'UpdateProfile'])->middleware('auth:api');
+
+// Create New Post
+Route::post('/createnewpost', [CreateNewPostController::class, 'CreateNewPost'])->middleware('auth:api');
