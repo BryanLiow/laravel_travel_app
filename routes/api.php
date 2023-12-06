@@ -11,6 +11,7 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostDetailController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,9 @@ Route::delete('/unlikepost', [LikeController::class, 'unlikePost'])->middleware(
 
 //Post Detail
 Route::post('/postdetail', [PostDetailController::class, 'postdetail'])->middleware('auth:api');
+
+//Write comment
+Route::post('/writecomment', [CommentController::class, 'writeComment'])->middleware('auth:api');
+
+//Get post comment
+Route::post('/comment', [CommentController::class, 'getComments'])->middleware('auth:api');
