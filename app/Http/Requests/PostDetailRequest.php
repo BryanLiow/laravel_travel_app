@@ -5,10 +5,10 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Validation\Validator; // Add this line
-use Illuminate\Http\Exceptions\HttpResponseException; // Add this line
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateNewPostRequest extends FormRequest
+class PostDetailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,14 +28,8 @@ class CreateNewPostRequest extends FormRequest
      */
     public function rules(): array
     {
-        Log::info('rules function');
-
         return [
-            'title' => 'required|string',
-            'caption' => 'required|string',
-            'postPhoto' => 'required|array',
-            'postPhoto.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'country' => 'nullable|string',
+            'post_id' => 'required|integer|exists:posts,id',
         ];
     }
 

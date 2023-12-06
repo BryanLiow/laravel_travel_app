@@ -9,9 +9,13 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function images() {
+    public function images()
+    {
         return $this->hasMany(PostImage::class);
     }
-    
-}
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}
