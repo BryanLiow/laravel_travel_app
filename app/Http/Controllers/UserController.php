@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller; // Ensure you're using the correct base controller
 use Exception;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller // Extend the base controller class
 {
@@ -30,7 +32,7 @@ class UserController extends Controller // Extend the base controller class
             // Update user's profile with the validated data
             $user->name = $request->name;
             $user->gender = $request->gender;
-            $user->headline = $request->headline ?? $user->headline; 
+            $user->headline = $request->headline ?? $user->headline;
             $user->country = $request->country ?? $user->country;
 
             // Log the new values
@@ -45,6 +47,32 @@ class UserController extends Controller // Extend the base controller class
             // Return the updated user profile
             return response()->json([
                 'message' => 'Profile updated successfully!',
+                'user' => $user
+            ]);
+        } catch (Exception $exception) {
+            Log::error($exception);
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
+    }
+
+    public function UserProfile(Request $request)
+    {
+        Log::info('UserProfile method called');
+
+        try {
+            // Retrieve user ID from the request
+            $userId = $request->userId;
+
+            // Find the user by ID
+            $user = User::findOrFail($userId);
+
+            Log::info('User profile retrieved: ' . $user->id);
+
+            // Return the user's profile
+            return response()->json([
+                'message' => 'User profile retrieved successfully!',
                 'user' => $user
             ]);
         } catch (Exception $exception) {
